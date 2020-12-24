@@ -1,15 +1,44 @@
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+//import { render } from 'react-dom';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import Register from "./screens/BookTransactionScreen";
+import searchScreen from "./screens/SearchScreen"
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export default class App extends React.Component{
+  render(){
+    return <AppContainer/>;
+  }
 }
+
+const TabNavigator = createBottomTabNavigator({
+  transaction: {screen: Register},
+  search: {screen: searchScreen},
+},
+{defaultNavigationOptions : ({navigation}) => ({
+  tabBarIcon: () => {
+    const routeName = navigation.state.routeName;
+    if(routeName === "transaction"){
+      return(
+        <Image source = {require("./assets/book.png")}
+        style = {{width: 25, height: 25}}/>
+      )
+    }
+    else if(routeName === "search"){
+      return(
+        <Image source = {require("./assets/searchingbook.png")}
+        style = {{width: 25, height: 25}}/>
+      )
+    }
+  }
+}
+)
+}
+);
+
+const AppContainer = createAppContainer(TabNavigator);
 
 const styles = StyleSheet.create({
   container: {
@@ -17,5 +46,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
+  }
 });
