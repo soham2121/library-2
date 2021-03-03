@@ -3,8 +3,9 @@ import React from 'react';
 //import { render } from 'react-dom';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import Register from "./screens/BookTransactionScreen";
-import searchScreen from "./screens/SearchScreen"
-import { createAppContainer } from "react-navigation";
+import searchScreen from "./screens/SearchScreen";
+import loginPage from "./screens/LoginPage";
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 export default class App extends React.Component{
@@ -38,7 +39,12 @@ const TabNavigator = createBottomTabNavigator({
 }
 );
 
-const AppContainer = createAppContainer(TabNavigator);
+const switchNavigator = createSwitchNavigator({
+  //loginPage: {screen: loginPage},
+  TabNavigator: {screen: TabNavigator}
+});
+
+const AppContainer = createAppContainer(switchNavigator);
 
 const styles = StyleSheet.create({
   container: {
