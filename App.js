@@ -40,7 +40,7 @@ const TabNavigator = createBottomTabNavigator({
 );
 
 const switchNavigator = createSwitchNavigator({
-  //loginPage: {screen: loginPage},
+  loginPage: {screen: loginPage},
   TabNavigator: {screen: TabNavigator}
 });
 
